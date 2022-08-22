@@ -30,7 +30,7 @@ This serves as a possible future template for a spoof website that may or may no
         pending further javascript understanding needed
         
 -contact-
-       pending, under construction
+       links back to code for viewing
      
       
   
