@@ -70,6 +70,10 @@ margin-right: 10px;
 .active{
   text-decoration: underline;
  }
+ a{
+  color: goldenrod;
+  text-decoration: none;
+}
 /*nav bar end*/
 :root {
   --slide-progress: 35%;
@@ -180,44 +184,7 @@ main {
     right: -3px;
   }
 }
-  /** contact**/
-  container{
-    display: grid;
-    place-items: center;
-    align-content: center;
-    min-height: 50vh;
-    padding: 2rem 0;
-  }
-  #contact{
-    display:inline-flex;
-    height:auto;
-    width: 300px;
-    flex-direction: column;
-    border: 5px solid goldenrod;
-    text-align: center
-    ;
-  }
-  #contact img{
-    height: 400px;
-    width:auto;
-    padding:10px;
-  }
-  #name{
-    text-decoration: underline;
-    font-size: 24px;
-  }
-  #blerb{
-    font-size: 16px;
-    padding:10px;
-  }
-  #back{
-    font-size: 16px;
-    color:goldenrod;
-  }
-  a{
-    color: goldenrod;
-    text-decoration: none;
-  }
+ 
   .container1{
     display: grid;
     grid-template-columns: minmax(4/1);
