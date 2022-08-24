@@ -1,10 +1,13 @@
-* {box-sizing:border-box;
-    margin: 0;
-    padding: 0;}
+*, *::after, *::before {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
     html, body {
         min-height: 100%;
         width: 100%;
-        font-size:calc(12px + 1.5vw);
         overflow-x: hidden;
         overflow-y: auto;
       }
@@ -20,17 +23,23 @@
   }
   body{
     background-color: gray;
-    height: auto;
+    height: 100%;
   }
-footer{
+  .words{ 
+    display: absolute;
+    flex-direction: column;
+   
+    text-align: center;
+    width: 80%;
+    margin-left: 10%;
 
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        height: 2.5rem;
-        color:goldenrod;
-        text-align: center;
-      }
+  }
+.footer{
+  display: absolute;
+  text-align: center;
+  margin-top: min(20px);
+  margin-left:50%;
+}
     
   /* nav bar*/
 .topnav{
@@ -45,8 +54,8 @@ footer{
 .logo{ grid-area: 1 / 1 / 2/ 2; }
 .links { grid-area: 1 /3/2; 
 justify-content: space-between 5px;
- 
-text-align: center;
+font-size: max(24px);
+text-align: right;
 margin-top: 10px;
 padding-top: 10px;
 padding-bottom: 10px;
@@ -62,291 +71,188 @@ margin-right: 10px;
   text-decoration: underline;
  }
 /*nav bar end*/
-  /*home*/
-  .slideBox {
-    max-height: 60vh;
-    max-width: 180vh;
-
-    display: inline-flex;
-    overflow: hidden;
-    scrollbar-width: none;
-    transform: translateX(0);
-    will-change: transform;
-    transition: transform 0.3s ease-out;
-    cursor: grab;
-    
-  }
-  
-  .slides{
-    width: 100vw;
-    height: width*0.52;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-  }
-  
-   
-  .slides img{
-    max-width: 100%;
-    max-height: 100%;
-    transition: transform 0.3s ease-in-out;
-    border-radius: 4px;
-    user-select: none;
-  }
-  
-  .grabbing {
-    cursor: grabbing;
-  }
-  
-  .grabbing .slides img{
-    transform: scale(0.9);
-  }
-  .words{
-   margin-left: 5%;
-   margin-right: 5%;
-   background-color: grey;
-   color: aliceblue;
-   min-height: fit-content;
-   margin-top: auto;
-   margin-bottom: 0%;
-   font:1vh;
-  }
-
-  .slideBox1 {
-    display: inline-flex;
-    justify-content: center;
-    align-self: center;
-    flex-wrap: wrap;
-    gap: 1em;
-    margin-top: 1%;
-    padding-top: max(10px, 5%)
-  }
-  .slides1{
-    text-align: center;
-    align-content: center;
-    flex-wrap: wrap;
-    gap: 5px;
-    min-height: 25%;
-    min-width: 20%;
-    max-height: 50%;
-    max-width: 30%;
-    border: 1px solid black;
-    padding-top: max(10px, 5%)
-
-  }
-  .slideBox1 img{    
-    padding-top: max(10px, 5%);
-    height: 75%;
-    width: 80%;
-    
-  }
-  p{margin:0;
-padding:0;}
-  /*home end*/
-  /*Shop start*/
-  /*sidepanel*/
- /* The sidepanel menu */
-.sidepanel {
-  height: 100%; /* Specify a height */
-  width: 0; /* 0 width - change this with JavaScript */
-  left:0;
-  position: fixed; /* Stay in place */
-  z-index: 2; /* Stay on top */
-  background-color: #111; /* Black*/
-  overflow-x: hidden; /* Disable horizontal scroll */
- transition: 0.5s; /* 0.5 second transition effect to slide in the sidepanel */
-opacity: 100%;
+:root {
+  --slide-progress: 35%;
+  --slide-progress--transition: all 200ms cubic-bezier(0.82, 0.02, 0.39, 1.01);
 }
 
-/* The sidepanel links */
-.sidepanel a {
-  text-decoration: none;
-  font-size: 25px;
-  color: #818181;
-  display: block;
-  transition: 0.3s;
+main {
+  font-family: 'Inter', sans-serif;
 }
 
-/* When you mouse over the navigation links, change their color */
-.sidepanel a:hover {
-  color: #f1f1f1;
+.container {
+  display: grid;
+  place-items: center;
+  align-content: center;
+  min-height: 100vh;
+  padding: 2rem 0;
 }
 
-/* Position and style the close button (top right corner) */
-.sidepanel .closebtn {
+.slider {
+  position: relative;
+  display: grid;
+  place-items: center;
+  max-width: 800px;
+  overflow: hidden;
+  box-shadow: 
+    20px 20px 50px hsla(210, 50%, 40%, .4),
+    -20px -20px 50px hsla(210, 50%, 80%, .2);
+  ;
+}
+
+.slide {
+  height: 400px;
+  max-height: 100vh;
+  display: flex;
+}
+
+.slide img {
+  width: 100%;
+  flex: 1 0 100%;
+  object-fit: cover;
+}
+
+.slider__progress{
   position: absolute;
-  top: 0;
-  right: 0%;
-  font-size: 20px;
-  margin-right: 50px;
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(90deg, hsla(210, 50%, 90%, .2), hsla(210, 50%, 70%, .1));
+  bottom: 0;
+  z-index: 4;
 }
 
-/* Style the button that is used to open the sidepanel */
-.openbtn {
-  font-size: 20px;
+.slider__progress::after {
+  content: '';
+  position: absolute;
+  background: linear-gradient(90deg, hsla(210, 50%, 90%, .7), hsla(210, 50%, 70%, .6));
+  width: var(--slide-progress);
+  height: 6px;
+  left: 0;
+  transition: var(--slide-progress--transition);
+}
+
+.slider__btn-container{
+  position: absolute;
+  width: 100%;
+}
+
+.slider__btn {
+  border-radius:50%;
+  position: absolute;
+  z-index: 2;
+  padding: .2rem;
+  top: 50%;
+  display: grid;
+  place-items: center;
   cursor: pointer;
-  background-color: #111;
-  color: white;
-  padding: 10px 15px;
-  border: none;
+  background: hsla(210, 50%, 30%, .15);
+  color: hsla(210, 50%, 95%, .9);
 }
 
-.openbtn:hover {
-  background-color: #444;
+.slider__btn svg {
+  pointer-events: none;
 }
-.bag{
-  position: fixed;
-  right:5%;
-  margin-top: 5px;
+
+.slider__btn--left {
+  left: 0;
+  transform: translate(50%, -50%);
 }
-h1{
-text-align: center;
-text-decoration: underline;
+.slider__btn--left:is(:hover, :focus) {
+  animation: 850ms infinite moveLeft cubic-bezier(0.25,-0.50, 0.17, 1.2);
 }
-.coffee button{
-background-color: #111;
-color: goldenrod;
+
+@keyframes moveLeft {
+  10% {
+    left: -3px;
+  }
 }
-  /*product card*/
-  .coffee{
+
+.slider__btn--right {
+  right: 0;
+  transform: translate(-50%, -50%);
+}
+.slider__btn--right:is(:hover, :focus) {
+  animation: 850ms infinite moveRight cubic-bezier(0.25,-0.50, 0.17, 1.2);
+}
+
+@keyframes moveRight {
+  10% {
+    right: -3px;
+  }
+}
+  /** contact**/
+  #contact{
     display:inline-flex;
-    height:100%;
+    height:auto;
+    width: 300px;
     flex-direction: column;
-    overflow: hidden;
- 
-   }
-   .coffee img{
-    padding-top: 5px;
-    height:70%;
-   }
-  
-   .coffee #txt{
-    justify-content: center;
+    border: 5px solid goldenrod;
+    margin-left: 25%;
+    margin-top:10%;
     text-align: center;
-    font-size: 2vh;
-    padding-bottom: 5%;
-   }
-  
-   .coffee:hover{
-    border:1px solid goldenrod;
-   }
-   #mug{
-    margin-top: min(10%);
-    margin-left:20%;
-   
-   }
-   /*product card end*/
-  
-  .container {
-    width: 80%;
-    height:auto;
-    margin: 20px auto;
-    border: 1px solid;
-    z-index: 0;
   }
-  .carousel {
-    background: none;
-    border-radius: 5px;
-    width: 100%;
-    height: 300px;
-    display: flex;
-    justify-content: flex;
-    overflow: hidden;
-    position:relative;
+  #contact img{
+    height: 400px;
+    width:auto;
+    padding:10px;
   }
-  .slider {
-    display: flex;
-    height: 100%;
-    width: 500%;
-    flex-shrink: 0;
-    transition: all 0.5s;
-  
+  #name{
+    text-decoration: underline;
+    font-size: 24px;
   }
-  section {
-    flex-basis: 20%;
-    flex-shrink: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 20px;
+  #blerb{
+    font-size: 16px;
+    padding:10px;
   }
-  .controls{
-    height:50px;
-    width:50px;
-    border: 5px solid black;
+  #back{
+    font-size: 16px;
+    color:goldenrod;
   }
-  .controls button.next {
-    position: absolute;
-    font-size: 25px;
-    right: 5px;
-    top: 35%;
-    background: none;
-    border: none;
-    cursor: pointer;
-    opacity:25%;
+  a{
     color: goldenrod;
-    z-index:0;
+    text-decoration: none;
   }
-  .controls button.prev {
-    position: absolute;
-    left: 5px ;
-    top: 35%;
-    background: none;
-    border: none;
-    cursor: pointer;
-    opacity: 25%;
+  .container1{
+    display: grid;
+    grid-template-columns: minmax(4/1);
+    place-items: center;
+    align-content: center;
+    min-height: 50vh;
+    padding: 2rem 0;
+  }
+  .content{
+    position: relative;
+    display: grid;
+    place-items: center;
+    max-width: 300px;
+    max-height:350px;
+    box-shadow: 
+      50px 20px 50px hsla(210, 50%, 40%, .4),
+      -20px -20px 50px hsla(210, 50%, 80%, .2);
+      border:1px solid black;
+      margin-bottom: 10px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      text-align: center;
+    ;
+  }
+  .pic img{
+    max-height:250px;
+    max-width:100%;
+  }
+  h1{
+    text-align: center;
+    text-decoration: underline;
     color: goldenrod;
-  }
-  .container2 {
-    width: 80%;
-    height:auto;
-    margin: 20px auto;
-    border: 1px solid 
-  }
-  .carousel2 {
-    background: none;
-    border-radius: 5px;
-    width: 100%;
-    height: 300px;
-    display: flex;
-    justify-content: flex;
-    overflow: hidden;
-    position:relative;
-  }
-  .slider2 {
-    display: flex;
-    height: 100%;
-    width: 500%;
-    flex-shrink: 0;
-    transition: all 0.5s;
-  
-  }
-
-  .controls2{
-    height:50px;
-    width:50px;
-  }
-  .controls2 button.next2 {
-    position: absolute;
-    font-size: 25px;
-    right: 5px;
-    top: 35%;
-    background: none;
-    cursor: pointer;
-    border:none;
-    opacity:25%;
-    color: goldenrod;
-    
-  }
-  .controls2 button.prev2 {
-    position: absolute;
-    left: 5px ;
-    top: 35%;
-    background: none;
-    border: none;
-    cursor: pointer;
-    opacity: 25%;
-    color: goldenrod;
+    -webkit-text-stroke: 1px black;
   }
  
+  @media (min-width: 600px) {
+    .container1 { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 900px) {
+    .container1 { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (min-width: 1200px){
+    .container1 { grid-template-columns: repeat(4, 1fr); }
+  }
