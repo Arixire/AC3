@@ -183,7 +183,6 @@ main {
   /** contact**/
   container{
     display: grid;
-    grid-template-columns: minmax(4/1);
     place-items: center;
     align-content: center;
     min-height: 50vh;
