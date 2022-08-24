@@ -181,15 +181,22 @@ main {
   }
 }
   /** contact**/
+  container{
+    display: grid;
+    grid-template-columns: minmax(4/1);
+    place-items: center;
+    align-content: center;
+    min-height: 50vh;
+    padding: 2rem 0;
+  }
   #contact{
     display:inline-flex;
     height:auto;
     width: 300px;
     flex-direction: column;
     border: 5px solid goldenrod;
-    margin-left: 25%;
-    margin-top:10%;
-    text-align: center;
+    text-align: center
+    ;
   }
   #contact img{
     height: 400px;
