@@ -219,7 +219,11 @@ main {
     color: goldenrod;
     -webkit-text-stroke: 1px black;
   }
- 
+ @media screen (min-width:300px){
+  .footer{
+    display:hide;
+  }
+ }
   @media (min-width: 600px) {
     .container1 { grid-template-columns: repeat(2, 1fr); 
     }
